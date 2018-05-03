@@ -5868,13 +5868,23 @@ var LoginComponent = /** @class */ (function () {
     LoginComponent.prototype.signInWithEmailAndPassword = function () {
         var _this = this;
         this.authService.signInWithEmailAndPassword(this.loginForm.value.email, this.loginForm.value.password).then(function () {
-            _this.router.navigate(['/']);
+            // this.router.navigate(['/']);
+            _this.authService.hasPermission.subscribe(function (res) {
+                if (res) {
+                    _this.router.navigate(['/']);
+                }
+            });
         });
     };
     LoginComponent.prototype.signInWithGoogleplus = function () {
         var _this = this;
         this.authService.signInWithGoogleplus().then(function () {
-            _this.router.navigate(['/']);
+            // this.router.navigate(['/']);
+            _this.authService.hasPermission.subscribe(function (res) {
+                if (res) {
+                    _this.router.navigate(['/']);
+                }
+            });
         });
     };
     LoginComponent = __decorate([
